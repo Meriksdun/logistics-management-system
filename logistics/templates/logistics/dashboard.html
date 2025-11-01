@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <h2 class="logo">Logistics</h2>
+        <ul>
+            <li><a href="{% url 'dashboard' %}" class="active">Dashboard</a></li>
+            <li><a href="{% url 'shipment_list' %}">Shipments</a></li>
+            <li><a href="{% url 'order_create' %}">Orders</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Reports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="date-time">
+                📅 {{ now|date:"d M Y, h:i A" }}
+            </div>
+            <div class="user-profile">
+                <span>👤 {{ user.username }}</span>
+            </div>
+        </header>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <div class="card">
+                <h3>📦 Shipments</h3>
+                <p>{{ shipment_list|length }}</p>
+            </div>
+            <div class="card">
+                <h3>🛒 Orders</h3>
+                <p>{{ order_list|length }}</p>
+            </div>
+            <div class="card">
+                <h3>👥 Users</h3>
+                <p>45</p>
+            </div>
+        </div>
+
+        <!-- Key Performance Indicators -->
+        <div class="kpi-section">
+            <div class="kpi-card">
+                <h4>Revenue</h4>
+                <p>$2,988,900</p>
+            </div>
+            <div class="kpi-card">
+                <h4>Net Profit</h4>
+                <p>$1,232,700</p>
+            </div>
+            <div class="kpi-card">
+                <h4>Pending Orders</h4>
+                <p>{{ pending_orders_count }}</p>
+            </div>
+        </div>
+
+        <!-- Graphs -->
+        <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    const revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Revenue ($)',
+                data: [10000, 15000, 20000, 25000, 30000],
+                borderColor: 'blue',
+                borderWidth: 2
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

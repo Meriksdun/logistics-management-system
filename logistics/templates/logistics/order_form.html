@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="order-container">
+    <h1>🛒 Create a New Order</h1>
+    
+    <form method="post" class="order-form">
+        {% csrf_token %}
+
+        <div class="form-fields">
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn-submit">🚀 Create Order</button>
+    </form>
+</div>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        flatpickr("#id_order_date", {
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            minDate: "today" // Prevent past dates
+        });
+    });
+</script>
+{% endblock %}

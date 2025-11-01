@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="fas fa-shipping-fast"></i> Shipment Details</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center">Tracking Number: <strong>{{ shipment.tracking_number }}</strong></h5>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <p><i class="fas fa-user"></i> <strong>Customer:</strong> {{ shipment.order.customer_name }}</p>
+                    <p><i class="fas fa-calendar-alt"></i> <strong>Order Date:</strong> {{ shipment.order.order_date }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <i class="fas fa-truck"></i> <strong>Status:</strong>
+                        <span class="badge 
+                            {% if shipment.status == 'Pending' %}badge-warning
+                            {% elif shipment.status == 'Shipped' %}badge-info
+                            {% elif shipment.status == 'Delivered' %}badge-success
+                            {% else %}badge-secondary{% endif %}">
+                            {{ shipment.status }}
+                        </span>
+                    </p>
+                    <p><i class="fas fa-dollar-sign"></i> <strong>Total Cost:</strong> ${{ shipment.order.total_cost }}</p>
+                    <p><i class="fas fa-calendar"></i> <strong>Estimated Delivery:</strong> {{ shipment.estimated_delivery|default:"Not set" }}</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'shipment_list' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Shipments
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

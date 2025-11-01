@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="order-container">
+    <div class="order-header">
+        <h1>🛒 Order #{{ order.id }}</h1>
+        <a href="{% url 'order_list' %}" class="btn-back">← Back to Orders</a>
+    </div>
+
+    <!-- Order Details -->
+    <div class="order-details">
+        <div class="detail-card">
+            <h3>👤 Customer</h3>
+            <p>{{ order.customer_name }}</p>
+        </div>
+        <div class="detail-card">
+            <h3>📅 Order Date</h3>
+            <p>{{ order.order_date }}</p>
+        </div>
+        <div class="detail-card">
+            <h3>💰 Total Cost</h3>
+            <p>$ {{ order.total_cost }}</p>
+        </div>
+    </div>
+
+    <!-- Order Status Update -->
+    <div class="status-update">
+        <h2>📌 Order Status</h2>
+        <form action="{% url 'order_status_update' order.id %}" method="post">
+            {% csrf_token %}
+            <label for="status"><strong>Status:</strong></label>
+            <select name="status" id="status">
+                {% for value, label in status_choices %}
+                    <option value="{{ value }}" {% if order.status == value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn-update">Update Status</button>
+        </form>
+    </div>
+
+    <!-- Shipments Section -->
+    <div class="shipment-section">
+        <h2>📦 Shipments</h2>
+        {% if order.shipments.all %}
+            <table class="shipment-table">
+                <thead>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shipment in order.shipments.all %}
+                        <tr>
+                            <td>{{ shipment.tracking_number }}</td>
+                            <td>
+                                <span class="status {{ shipment.status|lower }}">
+                                    {{ shipment.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{% url 'shipment_detail' shipment.pk %}" class="btn-details">View</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No shipments associated with this order.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

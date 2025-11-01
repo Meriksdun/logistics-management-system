@@ -1,0 +1,138 @@
+{% extends "logistics/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero text-center py-5">
+        
+    </section>
+
+    <!-- Features Section -->
+    <section class="features py-5">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="fas fa-truck fa-3x text-primary"></i>
+                <h3>Track Shipments</h3>
+                <p>Get real-time updates on shipments and deliveries.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-clipboard-list fa-3x text-primary"></i>
+                <h3>Manage Orders</h3>
+                <p>Organize and process orders efficiently with our system.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                <h3>Secure & Reliable</h3>
+                <p>Built with top-tier security to protect your business.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <h2 class="text-center font-weight-bold">What Our Clients Say</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"This platform has transformed our logistics operations!"</p>
+                    <div class="testimonial-footer">
+                        <img src="{% static '\img\default_avatar.jpg' %}" class="testimonial-img" alt="Jane Doe">
+                        <p class="testimonial-name">Jane Doe, <span>CEO of Logistics Inc.</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Managing shipments has never been easier."</p>
+                    <div class="testimonial-footer">
+                        <img src="{% static '\img\default_avatar.jpg' %}" class="testimonial-img" alt="John Smith">
+                        <p class="testimonial-name">John Smith, <span>Supply Chain Manager</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Highly recommend it to all businesses."</p>
+                    <div class="testimonial-footer">
+                        <img src="{% static '\img\default_avatar.jpg' %}" class="testimonial-img" alt="Alex Johnson">
+                        <p class="testimonial-name">Alex Johnson, <span>Business Owner</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+    body {
+        background: linear-gradient(to bottom, white 60%, #b3d9ff 85%, #4a90e2 100%);
+        background-attachment: fixed;
+    color: black; /* Ensures readability */
+    }
+
+    /* Style for testimonial section */
+    .testimonial-card {
+        background: rgba(255, 255, 255, 0.9); 
+        color: black; 
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* Testimonials Section */
+    .testimonial-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .testimonial-text {
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    
+    .testimonial-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .testimonial-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    
+    .testimonial-name {
+        font-weight: bold;
+        margin: 0;
+    }
+    
+    .testimonial-name span {
+        display: block;
+        font-size: 0.9rem;
+        color: gray;
+    }
+    </style>
+
+    <footer class="text-center py-3 mt-5">
+        <p>&copy; 2025 Logistics Management. All rights reserved.</p>
+    </footer>
+</div>
+{% endblock %}

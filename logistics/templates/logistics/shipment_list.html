@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Shipments</h2>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>Tracking Number</th>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Estimated Delivery</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shipment in shipments %}
+            <tr>
+                <td>{{ shipment.tracking_number }}</td>
+                <td>{{ shipment.order.id }}</td>
+                <td>
+                    <span class="badge 
+                        {% if shipment.status == 'Pending' %}badge-warning
+                        {% elif shipment.status == 'Shipped' %}badge-info
+                        {% elif shipment.status == 'Delivered' %}badge-success
+                        {% else %}badge-secondary{% endif %}">
+                        {{ shipment.status }}
+                    </span>
+                </td>
+                <td>{{ shipment.estimated_delivery|default:"Not set" }}</td>
+                <td>
+                    <a href="{% url 'shipment_detail' shipment.pk %}" class="btn btn-info btn-sm">Track</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
